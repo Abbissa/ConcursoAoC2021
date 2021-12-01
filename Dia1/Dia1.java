@@ -1,36 +1,39 @@
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Dia1 {
 
 	public static void main(String[] args) {
 
+		
 		Part1();
-
-		//Part2();
+		
+		Part2();
 	}
 	private static void Part1() {
 		int prev=-1;
 		int act=1;
 		int cont=0;
 
-		try (Scanner sc = new Scanner(new File(".\\Input.txt"))) {
+		try (Scanner sc = new Scanner(new File(".\\Inputs\\Input"))) {
 			while(sc.hasNextInt()) {
 				act=sc.nextInt();
-				System.out.println(act);
 				if(prev!=-1&&prev<act) {
 					cont++;
 				}
 				prev=act;
 			}
-			System.out.println(cont);
-		}catch(Exception e){}
+			System.out.println("Parte 1: "+cont);
+		}catch(Exception e){
+			System.out.println(e);
+		}
 	}
 
 	private static void Part2() {
 		int cont=0;
-		try (Scanner sc = new Scanner(new BufferedInputStream(System.in, 2 * 1024))) {
+		try (Scanner sc = new Scanner(new File(".\\Inputs\\Input"))) {
 			int n1=sc.nextInt();
 			int n2=sc.nextInt();
 			int n3=sc.nextInt();
@@ -45,7 +48,10 @@ public class Dia1 {
 				}
 				sum=aux;	
 			}
-			System.out.println(cont);
+			System.out.println("Parte 2: "+cont);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}	
 }
