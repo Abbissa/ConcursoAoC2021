@@ -5,10 +5,11 @@ import java.io.FileNotFoundException;
 public class Dia2 {
 
     public static void main(String[] args) {
-
+        long init = System.nanoTime();
         Part1();
 
         Part2();
+        System.out.println(Math.pow(10, -9) * (System.nanoTime() - init));
     }
 
     private static void Part1() {
@@ -17,7 +18,7 @@ public class Dia2 {
         String direccion;
         int movimiento;
 
-        try (Scanner sc = new Scanner(new File(".\\Inputs\\Dia2"))) {
+        try (Scanner sc = new Scanner(new File(".\\Dia2\\Dia2"))) {
             while (sc.hasNext()) {
                 direccion = sc.next();
                 movimiento = sc.nextInt();
@@ -41,26 +42,26 @@ public class Dia2 {
     }
 
     private static void Part2() {
-        int aim=0;
+        int aim = 0;
         int x = 0;
         int y = 0;
         String direccion;
         int movimiento;
 
-        try (Scanner sc = new Scanner(new File(".\\Inputs\\Dia2"))) {
+        try (Scanner sc = new Scanner(new File(".\\Dia2\\Dia2"))) {
             while (sc.hasNext()) {
                 direccion = sc.next();
                 movimiento = sc.nextInt();
                 switch (direccion) {
                     case "forward":
                         x += movimiento;
-                        y+=aim*movimiento;
+                        y += aim * movimiento;
                         break;
                     case "down":
                         aim += movimiento;
                         break;
                     case "up":
-                        aim-= movimiento;
+                        aim -= movimiento;
                         break;
                 }
             }

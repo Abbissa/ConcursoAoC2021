@@ -15,7 +15,7 @@ public class Dia1 {
 		int act=1;
 		int cont=0;
 
-		try (Scanner sc = new Scanner(new File(".\\Inputs\\Dia1"))) {
+		try (Scanner sc = new Scanner(new File(".\\Dia1\\Dia1"))) {
 			while(sc.hasNextInt()) {
 				act=sc.nextInt();
 				if(prev!=-1&&prev<act) {
@@ -31,7 +31,7 @@ public class Dia1 {
 
 	private static void Part2() {
 		int cont=0;
-		try (Scanner sc = new Scanner(new File(".\\Inputs\\Dia1"))) {
+		try (Scanner sc = new Scanner(new File(".\\Dia1\\Dia1"))) {
 			int n1=sc.nextInt();
 			int n2=sc.nextInt();
 			int n3=sc.nextInt();
