@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.io.File;
 
@@ -59,7 +58,7 @@ public class Dia3 {
             while (sc.hasNext()) {
                 O2.add(sc.next());
             }
-            ArrayList<String> CO2 = (ArrayList<String>) O2.clone();
+            ArrayList<String> CO2 = new ArrayList<String> (O2);
             int cont = 0;
             int veces = 0;
             int tam = O2.get(0).length();
@@ -125,11 +124,8 @@ public class Dia3 {
                     }
                     
                 }
-                
-
             }
-            System.out.println(CO2.toString());
-            System.out.println(O2.toString());
+            
             int co2=Integer.parseInt(CO2.get(0),2);
             int o2=Integer.parseInt(O2.get(0),2);
            System.out.println("Parte 2: "+co2*o2);

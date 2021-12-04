@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="Dia1"/>
 	<classpathentry kind="src" path="Dia2"/>
 	<classpathentry kind="src" path="Dia3"/>
+	<classpathentry kind="src" path="Dia4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
