@@ -5,9 +5,7 @@ import java.util.Scanner;
 public class Dia1 {
 
 	public static void main(String[] args) {
-
 		Part1();
-		
 		Part2();
 	}
 	private static void Part1() {
@@ -28,7 +26,6 @@ public class Dia1 {
 			System.out.println(e);
 		}
 	}
-
 	private static void Part2() {
 		int cont=0;
 		try (Scanner sc = new Scanner(new File(".\\Dia1\\Dia1"))) {

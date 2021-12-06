@@ -5,11 +5,12 @@ import java.io.File;
 public class Dia2 {
 
     public static void main(String[] args) {
-        long init = System.nanoTime();
+        
+        
         Part1();
 
         Part2();
-        System.out.println(Math.pow(10, -9) * (System.nanoTime() - init));
+        
     }
 
     private static void Part1() {
