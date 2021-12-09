@@ -6,8 +6,9 @@ public class Pair<O,E> {
 	private O left;
 
 	public Pair(O left,E right){
-		this.right= right;
 		this.left = left;
+		this.right= right;
+		
 
 	}
 

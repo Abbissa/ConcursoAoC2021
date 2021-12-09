@@ -1,9 +1,7 @@
 import java.io.File;
-import java.util.Arrays;
+
 import java.util.HashSet;
 import java.util.Scanner;
-
-import javax.lang.model.util.ElementScanner6;
 
 public class Dia8 {
 
@@ -38,7 +36,7 @@ public class Dia8 {
 
     private static void Part2() {
         String act;
-        int cont = 0;
+       
         int acum = 0;
         try (Scanner sc = new Scanner(new File(".\\Dia8\\Dia8"))) {
             while (sc.hasNext()) {
@@ -82,7 +80,7 @@ public class Dia8 {
                 }
                 acum += res;
             }
-            System.out.println("Parte 1: " + acum);
+            System.out.println("Parte 2: " + acum);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -98,30 +96,30 @@ public class Dia8 {
             if (tam == 2 && i != 1) {
 
                 aux1 = numeros[1];
-                
+
                 numeros[1] = numeros[i];
                 numeros[i] = aux1;
                 i = -1;
             } else if (tam == 3 && i != 7) {
                 aux1 = numeros[7];
-                
+
                 numeros[7] = numeros[i];
                 numeros[i] = aux1;
-                i = Math.min(7, i-1);
+                i = Math.min(7, i - 1);
             } else if (tam == 4 && i != 4) {
 
                 aux1 = numeros[4];
-                
+
                 numeros[4] = numeros[i];
                 numeros[i] = aux1;
-                i = Math.min(4, i-1);
+                i = Math.min(4, i - 1);
             } else if (tam == 7 && i != 8) {
 
                 aux1 = numeros[8];
-                
+
                 numeros[8] = numeros[i];
                 numeros[i] = aux1;
-                i = Math.min(7, i-1);
+                i = Math.min(7, i - 1);
 
             }
         }
@@ -130,7 +128,6 @@ public class Dia8 {
         // System.out.println("El 4 es: " + numeros[4]);
         // System.out.println("El 7 es: " + numeros[7]);
         // System.out.println("El 8 es: " + numeros[8]);
-
         for (int i = 0; i < numeros[7].length(); i++) {
             aux.add(numeros[7].charAt(i));
         }
@@ -156,11 +153,8 @@ public class Dia8 {
                     letras[2] = (Character) aux.toArray()[0];
                     // System.out.println("La c es :" + letras[2]);
                 }
-
             }
-
         }
-
         if (numeros[1].charAt(0) != letras[2])
             letras[5] = numeros[1].charAt(0);
         else
@@ -180,9 +174,7 @@ public class Dia8 {
                 else
                     aux.retainAll(temp);
             }
-
         }
-
         letras[3] = (Character) aux.toArray()[0];
         // System.out.println("La d es :" + letras[3]);
         HashSet<Character> temp = new HashSet<Character>();
@@ -215,11 +207,8 @@ public class Dia8 {
                     letras[6] = (Character) temp.toArray()[0];
                     // System.out.println("La g es :" + letras[6]);
                 }
-
             }
-
         }
-
         for (int i = 0; i < numeros.length; i++) {
             int tam = numeros[i].length();
             if (tam == 6) {
@@ -239,11 +228,8 @@ public class Dia8 {
                     letras[4] = (Character) temp.toArray()[0];
                     // System.out.println("La e es :" + letras[4]);
                 }
-
             }
-
         }
-
         // System.out.println();
         return letras;
     }
