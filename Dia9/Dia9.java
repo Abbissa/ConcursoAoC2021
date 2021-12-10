@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.PriorityQueue;
@@ -8,17 +9,28 @@ import java.util.Scanner;
 public class Dia9 {
     private static ArrayList<Pair<Integer, Integer>> minimos;
     private static ArrayList<Integer[]> filas;
-    private static PriorityQueue priorityQueue;
+    private static ArrayList<Character[]> mapa;
 
     public static void main(String[] args) {
         minimos = new ArrayList<Pair<Integer, Integer>>();
-
+        mapa = new ArrayList<Character[]>();
         Part1();
+        for (int i = 0; i < mapa.size(); i++) {
+            for (int j = 0; j < mapa.get(i).length; j++)
+                System.out.print(mapa.get(i)[j]);
+            System.out.println();
+        }
         Part2();
+        for (int i = 0; i < mapa.size(); i++) {
+            for (int j = 0; j < mapa.get(i).length; j++)
+                System.out.print(mapa.get(i)[j]);
+            System.out.println();
+        }
     }
 
     private static void Part1() {
         filas = new ArrayList<Integer[]>();
+
         try (Scanner sc = new Scanner(new File(".\\Dia9\\Dia9"))) {
             String aux = sc.nextLine();
 
@@ -28,6 +40,7 @@ public class Dia9 {
             int res = 0;
             for (int i = 0; i < aux.length(); i++) {
                 fila[i] = Integer.parseInt(aux.charAt(i) + "");
+                mapa.add(new Character[tam]);
             }
             filas.add(fila);
 
@@ -59,13 +72,19 @@ public class Dia9 {
                     if (menor) {
 
                         minimos.add(new Pair<Integer, Integer>(i, j));
+                        mapa.get(i)[j] = 'X';
                         res += temp[j] + 1;
-                    }
+                    } else if (filas.get(i)[j] == 9) {
+                        mapa.get(i)[j] = '█';
+                    } else
+                        mapa.get(i)[j] = Integer.toString(filas.get(i)[j]).charAt(0);
+
                     menor = true;
                 }
 
             }
             System.out.println("Parte 1: " + res);
+
         } catch (
 
         Exception e) {
@@ -75,8 +94,8 @@ public class Dia9 {
 
     private static void Part2() {
         ArrayList<HashSet<Integer>> añadidos = new ArrayList<HashSet<Integer>>();
-        PriorityQueue<Integer> basins = new PriorityQueue<Integer>(minimos.size(),new Comparador());
-       priorityQueue = new  PriorityQueue(2);
+        PriorityQueue<Integer> basins = new PriorityQueue<Integer>(minimos.size(), new Comparador());
+
         for (int i = 0; i < filas.size(); i++) {
             añadidos.add(new HashSet<Integer>());
         }
@@ -85,20 +104,16 @@ public class Dia9 {
 
             temp = añadidos.get(pair.getLeft());
             temp.add(pair.getRight());
-            System.out.println(pair.getLeft()+" "+pair.getRight());
-            int aux = findBasins(pair.getLeft(), pair.getRight(), añadidos);
 
-            System.out.println("----");
-            System.out.println(aux);
-            System.out.println("----");
+            int aux = findBasins(pair.getLeft(), pair.getRight(), añadidos);
 
             basins.add(aux);
         }
-        
-        int aux1=basins.poll();
-        int aux2=basins.poll();
-        int aux3=basins.poll();
-        System.out.println(aux1+" "+aux2+" "+aux3);
+
+        int aux1 = basins.poll();
+        int aux2 = basins.poll();
+        int aux3 = basins.poll();
+        System.out.println(aux1 + " " + aux2 + " " + aux3);
         System.out.println("Parte 2: " + aux1 * aux2 * aux3);
 
     }
@@ -106,15 +121,18 @@ public class Dia9 {
     static int findBasins(int i, int j, ArrayList<HashSet<Integer>> añadidos) {
         int count = 1;
         HashSet<Integer> temp;
-        
-        if (i > 0 && filas.get(i)[j] + 1 == filas.get(i - 1)[j] && filas.get(i - 1)[j] != 9
-                && !añadidos.get(i - 1).contains(j)){
+        if (mapa.get(i)[j] != 'X' && mapa.get(i)[j] != '█') {
+            mapa.get(i)[j] = '·';
+        }
+        if (i > 0 && filas.get(i)[j] < filas.get(i - 1)[j] && filas.get(i - 1)[j] != 9
+                && !añadidos.get(i - 1).contains(j)) {
             temp = añadidos.get(i - 1);
             if (temp == null) {
                 temp = new HashSet<Integer>();
                 añadidos.add(i - 1, temp);
             }
             temp.add(j);
+
             // System.out.println(1);
             // System.out.println();
             // System.out.println(i-1+" "+j);
@@ -123,7 +141,7 @@ public class Dia9 {
 
         }
 
-        if (j > 0 && filas.get(i)[j] + 1 == filas.get(i)[j - 1] && filas.get(i)[j - 1] != 9
+        if (j > 0 && filas.get(i)[j] < filas.get(i)[j - 1] && filas.get(i)[j - 1] != 9
                 && !añadidos.get(i).contains(j - 1)) {
             temp = añadidos.get(i);
             temp.add(j - 1);
@@ -135,8 +153,8 @@ public class Dia9 {
 
         }
 
-        if (i < filas.size() - 1 && filas.get(i + 1)[j].equals(filas.get(i)[j] + 1) && filas.get(i + 1)[j] != 9
-                &&  !añadidos.get(i + 1).contains(j)){
+        if (i < filas.size() - 1 && filas.get(i)[j] < filas.get(i + 1)[j] && filas.get(i + 1)[j] != 9
+                && !añadidos.get(i + 1).contains(j)) {
             temp = añadidos.get(i + 1);
             temp.add(j);
             // System.out.println(3);
@@ -146,7 +164,7 @@ public class Dia9 {
             count += findBasins(i + 1, j, añadidos);
 
         }
-        if (j < filas.get(i).length - 1 && filas.get(i)[j] + 1 == filas.get(i)[j + 1] && filas.get(i)[j + 1] != 9
+        if (j < filas.get(i).length - 1 && filas.get(i)[j] < filas.get(i)[j + 1] && filas.get(i)[j + 1] != 9
                 && !añadidos.get(i).contains(j + 1)) {
             temp = añadidos.get(i);
             temp.add(j + 1);
@@ -160,12 +178,13 @@ public class Dia9 {
         return count;
 
     }
-    public static class Comparador implements Comparator{
+
+    public static class Comparador implements Comparator<Integer> {
 
         @Override
-        public int compare(Object o1, Object o2) {
-            
-            return (int)o2-(int)o1;
+        public int compare(Integer o1, Integer o2) {
+
+            return o2 - o1;
         }
 
     }
