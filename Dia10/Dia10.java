@@ -74,7 +74,6 @@ public class Dia10 {
     }
 
     private static void Part2() {
-        int res = 0;
         String aux;
         PriorityQueue<Long> scores = new PriorityQueue<Long>();
         try (Scanner sc = new Scanner(new File(".\\Dia10\\Dia10"))) {
