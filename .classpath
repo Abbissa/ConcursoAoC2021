@@ -13,5 +13,6 @@
 	<classpathentry kind="src" path="Dia10"/>
 	<classpathentry kind="src" path="Dia11"/>
 	<classpathentry kind="src" path="Dia12"/>
+	<classpathentry kind="src" path="Dia15"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
